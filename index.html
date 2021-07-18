@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Creative-Board</title>
+</head>
+
+<body>
+  <canvas id="canvas" class="canvas">does not support HTML5 canvas!</canvas>
+  <div class="toolbar">
+    <!-- drawing pen -->
+    <div id="pen" class="cta pen selected tooltip">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-edit-2">
+        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+      </svg>
+    </div>
+    <!-- fav colors-->
+    <div class="colors">
+      <div class="col1 col" data-col="#4d7eff"></div>
+      <div class="col2 col" data-col="#73dc96"></div>
+      <div class="col3 col" data-col="#ff5e84"></div>
+      <div class="col4 col" data-col="#000"></div>
+    </div>
+    <!-- colour pick option -->
+    <input id="color-picker" type="color" />
+
+    <!-- shapes -->
+    <div class="shapes">
+      <div data-shape="line" id="line" class="cta shape"></div>
+      <div data-shape="rectangle" id="rect" class="cta shape">
+      </div>
+      <div data-shape="square" id="sqr" class="cta shape"></div>
+      <div data-shape="circle" id="crl" class="cta shape"></div>
+      <div data-shape="ellipse" id="elp" class="cta shape"></div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="cta shape-icon">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M6 15.2348L12 18.5681L18 15.2348V8.76521L12 5.43188L6 8.76521V15.2348ZM12 2L3 7V17L12 22L21 17V7L12 2Z"
+          fill="currentColor" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="cta close shape feather feather-x">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+    <div id="erase" class="cta erase tooltip">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-sidebar">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="3" y1="9" x2="21" y2="9"></line>
+      </svg>
+    </div>
+    <div class="slider-container tooltip">
+      <input id="thickness" type="range" min="1" max="20" value="1" />
+    </div>
+
+    <div class="dwnlds">
+      <div id="download" class="cta dwnld jpeg tooltip" onclick="download()">
+        .jpeg
+      </div>
+      <div class="cta dwnld json" onclick="saveJSON()">.json</div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="cta feather dnld-icon">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="cta dwnld close feather feather-x">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+    <div class="cta undo tooltip" onclick="undoDraw()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-corner-up-left">
+        <polyline points="9 14 4 9 9 4"></polyline>
+        <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+      </svg>
+    </div>
+    <div class="cta redo tooltip" onclick="redoDrawing()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-corner-up-right">
+        <polyline points="15 14 20 9 15 4"></polyline>
+        <path d="M4 20v-7a4 4 0 0 1 4-4h12"></path>
+      </svg>
+    </div>
+    <div class="cta trash tooltip" onclick="clearCanvas()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-trash">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      </svg>
+    </div>
+  </div>
+  <a class="info-btn" href="https://github.com/vikashkumar2020/creative-board" target="_blank"><svg width="24"
+      height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cta">
+      <path
+        d="M11 10.9794C11 10.4271 11.4477 9.97937 12 9.97937C12.5523 9.97937 13 10.4271 13 10.9794V16.9794C13 17.5317 12.5523 17.9794 12 17.9794C11.4477 17.9794 11 17.5317 11 16.9794V10.9794Z"
+        fill="currentColor" />
+      <path
+        d="M12 6.05115C11.4477 6.05115 11 6.49886 11 7.05115C11 7.60343 11.4477 8.05115 12 8.05115C12.5523 8.05115 13 7.60343 13 7.05115C13 6.49886 12.5523 6.05115 12 6.05115Z"
+        fill="currentColor" />
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z"
+        fill="currentColor" />
+    </svg></a>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <script src="./dwnld.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>

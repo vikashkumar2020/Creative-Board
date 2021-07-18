@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  box-sizing: border-box;
+  --blue1: #69b8ec;
+  --green1: #08e753;
+  --red1: #f00d42;
+  font-family: "Nunito", sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.canvas
+{
+    width: 100%;
+    height: 99%;
+    cursor:crosshair;
+    padding: 0%;
+    margin: 0%;
+}
+
+.toolbar {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 43em;
+  height: 2.8em;
+  border-radius: 5em;
+  background: #a2fde8;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.596);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5em;
+  justify-content: space-around;
+}
+
+.cta {
+  /* margin-right: 20px; */
+  display: flex;
+  align-items: center;
+  transition: all ease 0.2s;
+  color: rgb(100, 100, 100);
+  cursor: pointer;
+}
+
+.cta:hover {
+  color: rgb(0, 89, 255);
+}
+.cta:active {
+  transform: scale(0.94);
+}
+#color-picker {
+  outline: none;
+  border: 0px;
+  background: transparent;
+  width: 2.0em;
+  height: 2.0em;
+  border-radius: 200%;
+}
+
+.selected {
+  color: rgb(221, 96, 204);
+}
+
+.sel-col {
+  width: 1.125em;
+  height: 1.125em;
+  border-radius: 1.125em;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.colors {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.col {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1.5em;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-right: -5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+}
+
+.col:hover {
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
+  z-index: 1;
+  transition: ease-out 0.2s;
+}
+
+.col1 {
+  background-color: var(--blue1);
+}
+.col2 {
+  background-color: var(--green1);
+}
+.col3 {
+  background-color: var(--red1);
+}
+.col4 {
+  background-color: #000;
+}
+
+.shapes {
+  width: 1.5em;
+  height: 1.5em;
+  /* border: 1px solid rgba(0, 0, 0, 0.25); */
+  overflow: hidden;
+  z-index: 2;
+  transition: ease 0.3s;
+  border-radius: 0.3125em;
+  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); */
+}
+
+.shape {
+  width: 1.125em;
+  height: 1.125em;
+  /* border: 2px solid rgba(0, 0, 0, 0.25); */
+  display: none;
+}
+.shape:hover {
+  color: #4d7eff;
+}
+#line {
+  width: 0.125em;
+  background-color: rgba(0, 0, 0, 0.25);
+  transform: rotate(30deg);
+}
+
+#rect {
+  height: 0.875em;
+  width: 1.125em;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+#sqr {
+  height: 0.875em;
+  width: 0.875em;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+#crl {
+  height: 1em;
+  width: 1em;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 1em;
+}
+
+#elp {
+  height: 1em;
+  width: 1.125em;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 1em;
+}
+
+.shape.show {
+  display: block;
+
+  margin-left: 0.3125em;
+  margin-right: 0.3125em;
+}
+
+.shapes.expanded {
+  width: 10em;
+  height: 1.875em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: ease 0.3s;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25) inset;
+}
+
+.dwnld {
+  width: 1.125em;
+  height: 1.125em;
+  /* border: 2px solid rgba(0, 0, 0, 0.25); */
+  display: none;
+}
+
+.dwnlds {
+  width: 1.5em;
+  height: 1.5em;
+  /* border: 1px solid rgba(0, 0, 0, 0.25); */
+  overflow: hidden;
+  z-index: 2;
+  transition: ease 0.3s;
+  border-radius: 5px;
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); */
+}
+
+.dwnld.show {
+  display: block;
+}
+.dwnlds.expanded {
+  width: 7.5em;
+  height: 1.875em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  transition: ease 0.3s;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25) inset;
+}
+
+.json,
+.jpeg {
+  text-align: center;
+  width: 1.5em;
+  height: 1.5em;
+}
+.close {
+  color: rgb(245, 53, 53);
+}
+.hide {
+  display: none;
+}
+
+.info-btn {
+  position: absolute;
+  right: 1vh;
+  bottom: 1vh;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  body {
+    font-size: 8px;
+  }
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  body {
+    font-size: 18px;
+  }
+}
