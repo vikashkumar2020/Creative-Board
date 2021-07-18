@@ -14,4 +14,4 @@
 
 ## preview 
 
-<img  src="https://drive.google.com/file/d/1sFB9i41Fi_frJp5nRIEnQiWHcwg81HYS/view?usp=sharing" width=50%>
+<img  src="./res/preview.jpeg" width=50%>
